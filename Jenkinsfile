@@ -28,7 +28,7 @@ node {
   input 'Deploy stack?'
 
   stage ('Terraform Apply') {
-    sh 'terraform apply'
+    sh 'terraform apply -input=false'
   }
 
   stage ('Post Run Tests') {
