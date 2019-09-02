@@ -20,15 +20,15 @@ node {
   stage ('Terraform init Ali') {
     sh 'terraform init'
   }
-  stage ('Terraform Plan') {
+  stage ('Terraform Plan Ali') {
     sh 'terraform plan'
   }
 
   // Optional wait for approval
-  input 'Deploy stack?'
+  input 'Voulez-vous déployer la stack?'
 
   stage ('Terraform Apply') {
-    sh 'terraform apply -input=false'
+    sh 'terraform apply -auto-approve'
   }
 
   stage ('Post Run Tests') {
