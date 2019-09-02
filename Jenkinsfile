@@ -25,9 +25,9 @@ node {
   }
 
   // Optional wait for approval
-  input 'Voulez-vous déployer la stack?'
+  input 'Voulez-vous déployer la stack Ali?'
 
-  stage ('Terraform Apply') {
+  stage ('Terraform Apply Ali') {
     sh 'terraform apply -auto-approve'
   }
 
