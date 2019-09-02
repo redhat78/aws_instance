@@ -17,6 +17,9 @@ node {
     checkout scm
   }
 
+  stage ('Terraform init Ali') {
+    sh 'terraform init'
+  }
   stage ('Terraform Plan') {
     sh 'terraform plan'
   }
