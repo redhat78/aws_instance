@@ -16,9 +16,6 @@ node {
   stage ('Checkout') {
     checkout scm
   }
-  stage ('MFA AUTHENTIFICATOR') {
-    sh 'aws-mfa --duration 36000 --device arn:aws:iam::935427313625:mfa/ahadjchaib --assume-role arn:aws:iam::093469567457:role/SuperAdminRole'
-}
   stage ('Terraform init Ali') {
     sh 'terraform init'
   }
