@@ -1,0 +1,8 @@
+#!/bin/bash
+yum update -y
+yum install -y httpd
+service httpd start
+chkconfig httpd on
+#cd /var/www/html
+#curl http://g3s-system.ml/test_aws.tar -o test_aws.tar
+#tar xvf test_aws.tar
