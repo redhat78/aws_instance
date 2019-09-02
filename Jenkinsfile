@@ -18,14 +18,14 @@ node {
   }
 
   stage ('Terraform Plan') {
-    sh 'terraform plan -no-color -out=create.tfplan'
+    sh 'terraform plan'
   }
 
   // Optional wait for approval
   input 'Deploy stack?'
 
   stage ('Terraform Apply') {
-    sh 'terraform apply -no-color create.tfplan'
+    sh 'terraform apply'
   }
 
   stage ('Post Run Tests') {
