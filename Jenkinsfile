@@ -4,13 +4,11 @@
 properties([ parameters([
   string( name: 'AWS_ACCESS_KEY_ID', defaultValue: ''),
   string( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '')
-  string( name: 'AWS_SESSION_TOKEN', defaultValue: '')
 ]), pipelineTriggers([]) ])
 
 // Environment Variables
 env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
 env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
-env.AWS_SESSION_TOKEN = AWS_SESSION_TOKEN
 
 node {
   env.PATH += ":/root/terraform_29082019"
@@ -18,6 +16,11 @@ node {
   stage ('Checkout') {
     checkout scm
   }
+  stage ('Assume Role') {
+    sh 'aws sts assume-role --role-arn arn:aws:iam::093469567457:role/SuperAdminRole --role-session-name test-session-name'
+    withAWS(role: 'arn:aws:iam::093469567457:role/SuperAdminRole', ) 
+}
+
   stage ('Terraform init Ali') {
     sh 'terraform init'
   }
@@ -26,7 +29,7 @@ node {
   }
 
   // Optional wait for approval
-  input 'Voulez-vous déployer la stack Ali?'
+  #input 'Voulez-vous déployer la stack Ali?'
 
   stage ('Terraform Apply Ali') {
     sh 'terraform apply -auto-approve'
