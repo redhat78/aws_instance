@@ -16,10 +16,6 @@ node {
   stage ('Checkout') {
     checkout scm
   }
-  stage ('Assume Role') {
-    sh 'aws sts assume-role --role-arn arn:aws:iam::093469567457:role/SuperAdminRole --role-session-name test-session-name'
-    withAWS(role: 'arn:aws:iam::093469567457:role/SuperAdminRole', ) 
-}
 
   stage ('Terraform init Ali') {
     sh 'terraform init'
