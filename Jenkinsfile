@@ -2,11 +2,15 @@
 @Library('github.com/releaseworks/jenkinslib') _
 
 // Build Parameters
+properties([ parameters([
+  string( name: 'AWS_ACCESS_KEY_ID', defaultValue: ''),
+  string( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '')
+]), pipelineTriggers([]) ])
 
+// Environment Variables
+env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
+env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
 
-  sh 'aws sts assume-role --role-arn arn:aws:iam::093469567457:role/SuperAdminRole --role-session-name SuperAdminRole'
-withAWS(role: 'arn:aws:iam::093469567457:role/SuperAdminRole', ) {
-  sh 'aws s3api list-buckets'
 
 node {
   env.PATH += ":/root/terraform_29082019"
