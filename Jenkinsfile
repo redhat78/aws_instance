@@ -31,10 +31,4 @@ node {
     sh 'terraform show'
   }
 
-  stage ('Notification') {
-    mail from: "a.hadj-chaib@si2m.fr",
-         to: "a.hadj-chaib@si2m.fr",
-         subject: "Terraform build complete",
-         body: "Jenkins job ${env.JOB_NAME} - build ${env.BUILD_NUMBER} complete"
-  }
 }
