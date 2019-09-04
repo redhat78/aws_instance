@@ -1,14 +1,6 @@
 #!groovy
 
-// Build Parameters
-properties([ parameters([
-  string( name: 'AWS_ACCESS_KEY_ID', defaultValue: ''),
-  string( name: 'AWS_SECRET_ACCESS_KEY', defaultValue: '')
-]), pipelineTriggers([]) ])
 
-// Environment Variables
-env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
-env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
 
 node {
   env.PATH += ":/root/terraform_29082019"
@@ -16,7 +8,9 @@ node {
   stage ('Checkout') {
     checkout scm
   }
-
+  stage ('Charge Variables' ) {
+    sh 'source /var/lib/jenkins/.charge_var_aws.sh'
+  }
   stage ('Terraform init Ali') {
     sh 'terraform init'
   }
